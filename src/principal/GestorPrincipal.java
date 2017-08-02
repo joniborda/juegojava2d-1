@@ -32,10 +32,9 @@ public class GestorPrincipal {
 	}
 
 	private void inicializar() {
-		sd = new SuperficieDibujo();
-		ventana = new Ventana("", sd);
+		sd = new SuperficieDibujo(ancho, alto);
+		ventana = new Ventana(titulo, sd);
 		ge = new GestorEstados();
-
 	}
 
 	private void iniciarBuclePrincipal() {
@@ -77,10 +76,11 @@ public class GestorPrincipal {
 	}
 
 	private void dibujar() {
-		// ge.actualizar();
+		sd.dibujar(ge);
 	}
 
 	private void actualizar() {
-		// ge.dibujar();
+		sd.getTeclado().actualizar();
+		ge.actualizar();
 	}
 }
