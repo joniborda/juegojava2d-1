@@ -17,7 +17,7 @@ public class HojaSprites {
 
 	final private Sprite[] sprites;
 
-	public HojaSprites(final String ruta, final int tamañoSprites, final boolean hojaOpaca) {
+	public HojaSprites(final String ruta, final int tamanoSprites, final boolean hojaOpaca) {
 		final BufferedImage imagen;
 
 		if (hojaOpaca) {
@@ -29,17 +29,16 @@ public class HojaSprites {
 		this.anchoHojaEnPixeles = imagen.getWidth();
 		this.altoHojaEnPixeles = imagen.getHeight();
 
-		anchoHojaEnSprites = anchoHojaEnPixeles / tamañoSprites;
-		altoHojaEnSprites = altoHojaEnPixeles / tamañoSprites;
+		anchoHojaEnSprites = anchoHojaEnPixeles / tamanoSprites;
+		altoHojaEnSprites = altoHojaEnPixeles / tamanoSprites;
 
-		anchoSprites = tamañoSprites;
-		altoSprites = tamañoSprites;
+		anchoSprites = tamanoSprites;
+		altoSprites = tamanoSprites;
 
 		sprites = new Sprite[anchoHojaEnSprites * altoHojaEnSprites];
 
 		rellenarSpritesDesdeImagen(imagen);
 	}
-
 	public HojaSprites(final String ruta, final int anchoSprites, final int altoSprites, final boolean hojaOpaca) {
 		final BufferedImage imagen;
 
