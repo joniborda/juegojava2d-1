@@ -1,6 +1,5 @@
 package principal.maquinaestado.estados.juego;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import principal.mapas.Mapa;
@@ -21,11 +20,7 @@ public class GestorJuego implements EstadoJuego {
 	}
 
 	public void dibujar(Graphics g) {
-		// BufferedImage imagen = hs.getSprite(3, 3).getImagen();
-		// g.drawImage(imagen, 100, 100, null);
-
-		g.setColor(Color.white);
-		// g.drawString(mapa.contenido, 10, 10);
+		mapa.dibujar(g);
 	}
 
 }
