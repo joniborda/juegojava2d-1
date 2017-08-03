@@ -3,16 +3,18 @@ package principal.maquinaestado.estados.juego;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import principal.herramientas.CargadorRecursos;
+import principal.mapas.Mapa;
 import principal.maquinaestado.EstadoJuego;
 
 public class GestorJuego implements EstadoJuego {
 
 	private GestorMapa gm;
 
-	String texto = CargadorRecursos.leerArchivoTexto("/texto/prueba");
+	// String texto = CargadorRecursos.leerArchivoTexto("/texto/prueba");
 	// HojaSprites hs = new HojaSprites("/imagenes/hojasTexturas/desierto.png",
 	// 32, true);
+
+	Mapa mapa = new Mapa("/texto/prueba");
 
 	public void actualizar() {
 
@@ -23,7 +25,7 @@ public class GestorJuego implements EstadoJuego {
 		// g.drawImage(imagen, 100, 100, null);
 
 		g.setColor(Color.white);
-		g.drawString(texto, 10, 10);
+		// g.drawString(mapa.contenido, 10, 10);
 	}
 
 }
