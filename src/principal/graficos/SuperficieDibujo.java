@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
+import principal.control.Raton;
 import principal.control.Teclado;
 import principal.maquinaestado.GestorEstados;
 
@@ -17,13 +18,16 @@ public class SuperficieDibujo extends Canvas {
 	private int ancho;
 	private int alto;
 	private Teclado teclado;
+	private Raton raton;
 
 	public SuperficieDibujo(final int ancho, final int alto) {
 		this.ancho = ancho;
 		this.alto = alto;
 		this.teclado = new Teclado();
+		this.raton = new Raton();
 
 		setIgnoreRepaint(true);
+		setCursor(raton.getCursor());
 		setPreferredSize(new Dimension(ancho, alto));
 		addKeyListener(teclado);
 		setFocusable(true);
