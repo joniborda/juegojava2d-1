@@ -1,5 +1,6 @@
 package principal;
 
+import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaestado.GestorEstados;
@@ -21,7 +22,9 @@ public class GestorPrincipal {
 	}
 
 	public static void main(String[] args) {
-		GestorPrincipal gp = new GestorPrincipal("After-d", 640, 360);
+		Constantes.ANCHO_PANTALLA = 640;
+		Constantes.ALTO_PANTALLA = 360;
+		GestorPrincipal gp = new GestorPrincipal("After-d", Constantes.ANCHO_PANTALLA, Constantes.ALTO_PANTALLA);
 		gp.iniciarJuego();
 		gp.iniciarBuclePrincipal();
 	}
@@ -80,7 +83,7 @@ public class GestorPrincipal {
 	}
 
 	private void actualizar() {
-		sd.getTeclado().actualizar();
+		GestorControles.teclado.actualizar();
 		ge.actualizar();
 	}
 }

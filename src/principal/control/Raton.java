@@ -14,7 +14,7 @@ public class Raton {
 	public Raton() {
 		Toolkit configuracion = Toolkit.getDefaultToolkit();
 
-		BufferedImage icono = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/hojasTexturas/1.png");
+		BufferedImage icono = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/cursores/1.png");
 
 		Point punta = new Point(0, 0);
 
