@@ -7,4 +7,6 @@ public class Constantes {
 
 	public static int ANCHO_PANTALLA;
 	public static int ALTO_PANTALLA;
+
+	public static int APS = 0;
 }

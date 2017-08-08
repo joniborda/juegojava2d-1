@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import principal.control.GestorControles;
 import principal.entes.Jugador;
 import principal.herramientas.CargadorRecursos;
 import principal.mapas.Mapa;
@@ -15,24 +14,10 @@ public class GestorJuego implements EstadoJuego {
 	Mapa mapa = new Mapa("/texto/prueba");
 	Jugador jugador = new Jugador(1.0, 1.0);
 
-	BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/jugadores/1.png");
+	BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/hojasPersonajes/1.png");
 
 	public void actualizar() {
-		if (GestorControles.teclado.isArriba()) {
-			jugador.establecerPosicionY(jugador.obtenerPosicionY() - 1);
-		}
-
-		if (GestorControles.teclado.isAbajo()) {
-			jugador.establecerPosicionY(jugador.obtenerPosicionY() + 1);
-		}
-
-		if (GestorControles.teclado.isIzquierda()) {
-			jugador.establecerPosicionX(jugador.obtenerPosicionX() - 1);
-		}
-
-		if (GestorControles.teclado.isDerecha()) {
-			jugador.establecerPosicionX(jugador.obtenerPosicionX() + 1);
-		}
+		jugador.actualizar();
 	}
 
 	public void dibujar(Graphics g) {
