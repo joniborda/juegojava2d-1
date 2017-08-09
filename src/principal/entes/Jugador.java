@@ -28,7 +28,7 @@ public class Jugador {
 
 		this.direccion = 0;
 
-		this.hs = new HojaSprites("/imagenes/hojasTexturas/1.png", Constantes.LADO_SPRITE, false);
+		this.hs = new HojaSprites(Constantes.RUTA_JUGADOR, Constantes.LADO_SPRITE, false);
 		this.imagenActual = hs.getSprite(4, 3).getImagen();
 
 		this.animacion = 0;
@@ -161,8 +161,8 @@ public class Jugador {
 
 	public void dibujar(Graphics g) {
 
-		final int centroX = Constantes.ANCHO_PANTALLA / 2 - Constantes.LADO_SPRITE / 2;
-		final int centroY = Constantes.ALTO_PANTALLA / 2 - Constantes.LADO_SPRITE / 2;
+		final int centroX = Constantes.ANCHO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
+		final int centroY = Constantes.ALTO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
 
 		g.drawImage(imagenActual, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE, null);
 	}

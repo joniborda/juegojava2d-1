@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
+import principal.Constantes;
 import principal.herramientas.CargadorRecursos;
 
 public class Raton {
@@ -14,7 +15,7 @@ public class Raton {
 	public Raton() {
 		Toolkit configuracion = Toolkit.getDefaultToolkit();
 
-		BufferedImage icono = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/cursores/1.png");
+		BufferedImage icono = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.RUTA_CURSOR);
 
 		Point punta = new Point(0, 0);
 

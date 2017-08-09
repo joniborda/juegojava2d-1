@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import principal.Constantes;
 import principal.entes.Jugador;
 import principal.herramientas.CargadorRecursos;
 import principal.mapas.Mapa;
@@ -14,7 +15,7 @@ public class GestorJuego implements EstadoJuego {
 	Mapa mapa = new Mapa("/texto/prueba");
 	Jugador jugador = new Jugador(1.0, 1.0);
 
-	BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida("/imagenes/hojasPersonajes/1.png");
+	BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.RUTA_LOGO);
 
 	public void actualizar() {
 		jugador.actualizar();
