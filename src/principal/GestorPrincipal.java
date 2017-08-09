@@ -1,6 +1,5 @@
 package principal;
 
-import principal.control.GestorControles;
 import principal.graficos.SuperficieDibujo;
 import principal.graficos.Ventana;
 import principal.maquinaestado.GestorEstados;
@@ -85,7 +84,6 @@ public class GestorPrincipal {
 	}
 
 	private void actualizar() {
-		GestorControles.teclado.actualizar();
 		ge.actualizar();
 	}
 }

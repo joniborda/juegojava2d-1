@@ -12,9 +12,12 @@ public class Jugador {
 	private double posicionX;
 	private double posicionY;
 
-	private int estadoAnimacion;
-
 	private int direccion;
+
+	private double velocidad = 1;
+	private boolean enMovimiento = false;
+	private int animacion;
+	private int estado;
 
 	private HojaSprites hs;
 	private BufferedImage imagenActual;
@@ -22,65 +25,138 @@ public class Jugador {
 	public Jugador(final double posicionX, final double posicionY) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
-		this.estadoAnimacion = 0;
 
 		this.direccion = 0;
 
 		this.hs = new HojaSprites("/imagenes/hojasTexturas/1.png", Constantes.LADO_SPRITE, false);
 		this.imagenActual = hs.getSprite(4, 3).getImagen();
+
+		this.animacion = 0;
+		this.estado = 0;
 	}
 
 	public void actualizar() {
-		if (GestorControles.teclado.isArriba()) {
-			direccion = 1;
-			cambiarImagenActual(direccion);
-			this.posicionY -= 0.5;
+		cambiarAnimacionEstado();
+		enMovimiento = false;
+		determinarDireccion();
+		animar();
+	}
+
+	private void cambiarAnimacionEstado() {
+		if (animacion < 30) {
+			animacion++;
+		} else {
+			animacion = 0;
 		}
 
-		if (GestorControles.teclado.isAbajo()) {
-			direccion = 0;
-			cambiarImagenActual(direccion);
-			this.posicionY += 0.5;
-		}
-
-		if (GestorControles.teclado.isIzquierda()) {
-			direccion = 2;
-			cambiarImagenActual(direccion);
-			this.posicionX -= 0.5;
-		}
-
-		if (GestorControles.teclado.isDerecha()) {
-			direccion = 3;
-			cambiarImagenActual(direccion);
-			this.posicionX += 0.5;
+		if (animacion < 15) {
+			estado = 1;
+		} else {
+			estado = 2;
 		}
 	}
 
-	private void cambiarImagenActual(int direccion) {
-		int frecuenciaAnimacion = 15; // 60/15 = 4
-		int limiteEstado = 60 / frecuenciaAnimacion;
+	private void determinarDireccion() {
+		final int velocidadX = evaluarVelocidadX();
+		final int velocidadY = evaluarVelocidadY();
 
-		if (Constantes.APS % frecuenciaAnimacion == 0) {
-			estadoAnimacion++;
-			if (estadoAnimacion >= limiteEstado) {
-				estadoAnimacion = 0;
+		if (velocidadX == 0 && velocidadY == 0) {
+			return;
+		}
+		if ((velocidadX != 0 && velocidadY == 0) || (velocidadX == 0 && velocidadY != 0)) {
+			mover(velocidadX, velocidadY);
+		} else {
+			// izqueirda y arriba
+			if (velocidadX == -1 && velocidadY == -1) {
+				if (GestorControles.teclado.izquierda.getUltimaPulsacion() > GestorControles.teclado.arriba
+						.getUltimaPulsacion()) {
+					mover(velocidadX, 0);
+				} else {
+					mover(0, velocidadY);
+				}
 			}
-
-			switch (estadoAnimacion) {
-			case 0:
-				this.imagenActual = hs.getSprite(direccion, estadoAnimacion).getImagen();
-				break;
-			case 1:
-				this.imagenActual = hs.getSprite(direccion, 1).getImagen();
-				break;
-			case 2:
-				this.imagenActual = hs.getSprite(direccion, estadoAnimacion).getImagen();
-				break;
-			case 3:
-				this.imagenActual = hs.getSprite(direccion, 2).getImagen();
-				break;
+			// izquierda y abajo
+			if (velocidadX == -1 && velocidadY == 1) {
+				if (GestorControles.teclado.izquierda.getUltimaPulsacion() > GestorControles.teclado.abajo
+						.getUltimaPulsacion()) {
+					mover(velocidadX, 0);
+				} else {
+					mover(0, velocidadY);
+				}
+			}
+			// derecha y arriba
+			if (velocidadX == 1 && velocidadY == -1) {
+				if (GestorControles.teclado.derecha.getUltimaPulsacion() > GestorControles.teclado.arriba
+						.getUltimaPulsacion()) {
+					mover(velocidadX, 0);
+				} else {
+					mover(0, velocidadY);
+				}
+			}
+			// derecha y abajo
+			if (velocidadX == 1 && velocidadY == 1) {
+				if (GestorControles.teclado.derecha.getUltimaPulsacion() > GestorControles.teclado.abajo
+						.getUltimaPulsacion()) {
+					mover(velocidadX, 0);
+				} else {
+					mover(0, velocidadY);
+				}
 			}
 		}
+	}
+
+	private void mover(final int velocidadX, final int velocidadY) {
+		enMovimiento = true;
+
+		cambiarVelocidadX(velocidadX, velocidadY);
+
+		posicionX += velocidadX * this.velocidad;
+		posicionY += velocidadY * this.velocidad;
+	}
+
+	private void cambiarVelocidadX(final int velocidadX, final int velocidadY) {
+		if (velocidadX == -1) {
+			direccion = 3;
+		} else if (velocidadX == 1) {
+			direccion = 2;
+		}
+
+		if (velocidadY == -1) {
+			direccion = 1;
+		} else if (velocidadY == 1) {
+			direccion = 0;
+		}
+	}
+
+	private int evaluarVelocidadX() {
+		int velocidadX = 0;
+		if (GestorControles.teclado.izquierda.estaPulsada() && !GestorControles.teclado.derecha.estaPulsada()) {
+			velocidadX = -1;
+		} else if (GestorControles.teclado.derecha.estaPulsada() && !GestorControles.teclado.izquierda.estaPulsada()) {
+			velocidadX = 1;
+		}
+
+		return velocidadX;
+	}
+
+	private int evaluarVelocidadY() {
+		int velocidadY = 0;
+		if (GestorControles.teclado.arriba.estaPulsada() && !GestorControles.teclado.abajo.estaPulsada()) {
+			velocidadY = -1;
+		} else if (GestorControles.teclado.abajo.estaPulsada() && !GestorControles.teclado.arriba.estaPulsada()) {
+			velocidadY = 1;
+		}
+
+		return velocidadY;
+	}
+
+	private void animar() {
+		if (!enMovimiento) {
+			estado = 0;
+			animacion = 0;
+
+		}
+		imagenActual = hs.getSprite(direccion, estado).getImagen();
 	}
 
 	public void dibujar(Graphics g) {
