@@ -50,7 +50,6 @@ public class Mapa {
 	}
 
 	private Sprite[] asignarSprites(final String[] partesPaleta, final String[] hojasSeparadas) {
-		System.out.println("tamaña que carga la paleta " + partesPaleta.length);
 		Sprite[] paleta = new Sprite[partesPaleta.length];
 
 		HojaSprites hoja = new HojaSprites("/imagenes/hojasTexturas/" + hojasSeparadas[0] + ".png", 32, false);
@@ -61,7 +60,7 @@ public class Mapa {
 
 			int indicePaleta = Integer.parseInt(partesSprite[0]);
 			int indiceSpriteHoja = Integer.parseInt(partesSprite[2]);
-
+			System.out.println(partesSprite[0]);
 			paleta[indicePaleta] = hoja.getSprite(indiceSpriteHoja);
 		}
 
