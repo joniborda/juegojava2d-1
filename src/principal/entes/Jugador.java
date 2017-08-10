@@ -29,7 +29,7 @@ public class Jugador {
 		this.direccion = 0;
 
 		this.hs = new HojaSprites(Constantes.RUTA_JUGADOR, Constantes.LADO_SPRITE, false);
-		this.imagenActual = hs.getSprite(4, 3).getImagen();
+		this.imagenActual = hs.getSprite(0, 0).getImagen();
 
 		this.animacion = 0;
 		this.estado = 0;
@@ -43,16 +43,18 @@ public class Jugador {
 	}
 
 	private void cambiarAnimacionEstado() {
-		if (animacion < 30) {
+		if (animacion < 40) {
 			animacion++;
 		} else {
 			animacion = 0;
 		}
 
-		if (animacion < 15) {
+		if (animacion < 10) {
 			estado = 1;
-		} else {
+		} else if (animacion < 30 && animacion >= 20) {
 			estado = 2;
+		} else {
+			estado = 0;
 		}
 	}
 
@@ -118,11 +120,11 @@ public class Jugador {
 		if (velocidadX == -1) {
 			direccion = 3;
 		} else if (velocidadX == 1) {
-			direccion = 2;
+			direccion = 1;
 		}
 
 		if (velocidadY == -1) {
-			direccion = 1;
+			direccion = 2;
 		} else if (velocidadY == 1) {
 			direccion = 0;
 		}
@@ -164,7 +166,7 @@ public class Jugador {
 		final int centroX = Constantes.ANCHO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
 		final int centroY = Constantes.ALTO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
 
-		g.drawImage(imagenActual, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE, null);
+		g.drawImage(imagenActual, centroX, centroY, null);
 	}
 
 	public void establecerPosicionX(final double posicionX) {

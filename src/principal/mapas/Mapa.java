@@ -20,6 +20,9 @@ public class Mapa {
 	private final int[] sprites;
 	private final String[] hojasSeparadas;
 
+	private final int MARGEN_X = Constantes.ANCHO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
+	private final int MARGEN_Y = Constantes.ALTO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
+
 	private final boolean[] colisiones;
 
 	public Mapa(final String ruta) {
@@ -60,7 +63,7 @@ public class Mapa {
 
 			int indicePaleta = Integer.parseInt(partesSprite[0]);
 			int indiceSpriteHoja = Integer.parseInt(partesSprite[2]);
-			System.out.println(partesSprite[0]);
+
 			paleta[indicePaleta] = hoja.getSprite(indiceSpriteHoja);
 		}
 
@@ -113,13 +116,15 @@ public class Mapa {
 	}
 
 	public void dibujar(Graphics g, int posicionX, int posicionY) {
-		int anchoSprite = Constantes.LADO_SPRITE;
-		int altoSprite = Constantes.LADO_SPRITE;
 
 		for (int y = 0; y < this.alto; y++) {
 			for (int x = 0; x < this.ancho; x++) {
 				BufferedImage imagen = this.paleta[this.sprites[x + y * this.ancho]].getImagen();
-				g.drawImage(imagen, x * anchoSprite - posicionX, y * altoSprite - posicionY, null);
+
+				int puntoX = x * Constantes.LADO_SPRITE - posicionX + MARGEN_X;
+				int puntoY = y * Constantes.LADO_SPRITE - posicionY + MARGEN_Y;
+
+				g.drawImage(imagen, puntoX, puntoY, null);
 			}
 		}
 	}

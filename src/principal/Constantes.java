@@ -13,9 +13,9 @@ public class Constantes {
 
 	public static int APS = 0;
 
-	public static String RUTA_JUGADOR = "/imagenes/hojasTexturas/1.png";
+	public static String RUTA_JUGADOR = "/imagenes/hojasPersonajes/2.png";
 	public static String RUTA_MAPA = "/imagenes/hojasTexturas/1.png";
-	public static String RUTA_CURSOR = "/imagenes/cursores/1.png";
-	public static String RUTA_LOGO = "/imagenes/cursores/1.png";
+	public static String RUTA_CURSOR = "/imagenes/cursores/2.png";
+	public static String RUTA_LOGO = "/imagenes/hojasPersonajes/1.png";
 
 }
