@@ -1,6 +1,7 @@
 package principal.mapas;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -115,7 +116,7 @@ public class Mapa {
 		return vectorSprites;
 	}
 
-	public void dibujar(Graphics g, int posicionX, int posicionY) {
+	public void dibujar(Graphics g, final int posicionX, final int posicionY) {
 
 		for (int y = 0; y < this.alto; y++) {
 			for (int x = 0; x < this.ancho; x++) {
@@ -127,5 +128,15 @@ public class Mapa {
 				g.drawImage(imagen, puntoX, puntoY, null);
 			}
 		}
+	}
+
+	public Rectangle obtenerBordes(final int posicionX, final int posicionY, final int anchoJugador,
+			final int altoJugador) {
+		int x = MARGEN_X - posicionX + anchoJugador;
+		int y = MARGEN_Y - posicionY + altoJugador;
+		int ancho = this.ancho * Constantes.LADO_SPRITE - anchoJugador * 2;
+		int alto = this.alto * Constantes.LADO_SPRITE - altoJugador * 2;
+
+		return new Rectangle(x, y, ancho, alto);
 	}
 }

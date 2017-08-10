@@ -40,8 +40,6 @@ public class GestorPrincipal {
 	}
 
 	private void iniciarBuclePrincipal() {
-		int aps = 0;
-		int fps = 0;
 
 		final int NS_POR_SEGUNDO = 1000000000;
 		final int APS_OBJETIVO = 60;
@@ -61,19 +59,19 @@ public class GestorPrincipal {
 
 			while (delta >= 1) {
 				actualizar();
-				aps++;
-				Constantes.APS = aps;
+				Constantes.APS++;
 				delta--;
 			}
 
 			dibujar();
-			fps++;
+			Constantes.FPS++;
 
 			if (System.nanoTime() - referenciaContador > NS_POR_SEGUNDO) {
-				System.out.println("FPS: " + fps + " APS: " + aps);
-				aps = 0;
+
+				Constantes.APS_CONTADOR = Constantes.APS;
+				Constantes.FPS_CONTADOR = Constantes.FPS;
 				Constantes.APS = 0;
-				fps = 0;
+				Constantes.FPS = 0;
 				referenciaContador = System.nanoTime();
 			}
 		}

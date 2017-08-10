@@ -12,6 +12,10 @@ public class Constantes {
 	public static int CENTRO_VENTANA_Y = ALTO_VENTANA / 2;
 
 	public static int APS = 0;
+	public static int FPS = 0;
+
+	public static int APS_CONTADOR = 0;
+	public static int FPS_CONTADOR = 0;
 
 	public static String RUTA_JUGADOR = "/imagenes/hojasPersonajes/2.png";
 	public static String RUTA_MAPA = "/imagenes/hojasTexturas/1.png";
