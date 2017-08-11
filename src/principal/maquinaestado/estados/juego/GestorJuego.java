@@ -13,12 +13,13 @@ import principal.maquinaestado.EstadoJuego;
 public class GestorJuego implements EstadoJuego {
 
 	Mapa mapa = new Mapa("/texto/prueba");
-	Jugador jugador = new Jugador(0.0, 0.0, mapa);
+	Jugador jugador = new Jugador(0.0, 200.0, mapa);
 
 	BufferedImage logo = CargadorRecursos.cargarImagenCompatibleTranslucida(Constantes.RUTA_LOGO);
 
 	public void actualizar() {
 		jugador.actualizar();
+		mapa.actualizar((int) jugador.obtenerPosicionX(), (int) jugador.obtenerPosicionY());
 	}
 
 	public void dibujar(Graphics g) {

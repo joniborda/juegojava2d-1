@@ -26,6 +26,8 @@ public class Mapa {
 
 	private final boolean[] colisiones;
 
+	public ArrayList<Rectangle> areasColision = new ArrayList<Rectangle>();
+
 	public Mapa(final String ruta) {
 		String contenido = CargadorRecursos.leerArchivoTexto(ruta);
 
@@ -116,6 +118,27 @@ public class Mapa {
 		return vectorSprites;
 	}
 
+	public void actualizar(final int posicionX, final int posicionY) {
+		actualizarAreasColision(posicionX, posicionY);
+	}
+
+	private void actualizarAreasColision(final int posicionX, final int posicionY) {
+		if (!areasColision.isEmpty()) {
+			areasColision.clear();
+		}
+
+		for (int y = 0; y < this.alto; y++) {
+			for (int x = 0; x < this.ancho; x++) {
+				int puntoX = x * Constantes.LADO_SPRITE - posicionX + MARGEN_X;
+				int puntoY = y * Constantes.LADO_SPRITE - posicionY + MARGEN_Y;
+
+				if (colisiones[x + y * this.ancho]) {
+					final Rectangle r = new Rectangle(puntoX, puntoY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+					areasColision.add(r);
+				}
+			}
+		}
+	}
 	public void dibujar(Graphics g, final int posicionX, final int posicionY) {
 
 		for (int y = 0; y < this.alto; y++) {

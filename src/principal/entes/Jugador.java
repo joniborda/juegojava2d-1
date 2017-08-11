@@ -133,10 +133,93 @@ public class Jugador {
 		cambiarVelocidadX(velocidadX, velocidadY);
 
 		if (!fueraMapa(velocidadX, velocidadY)) {
-			posicionX += velocidadX * this.velocidad;
-			posicionY += velocidadY * this.velocidad;
+			if (velocidadX == -1 && !enColisionIzquierda(velocidadX)) {
+				posicionX += velocidadX * this.velocidad;
+				return;
+			}
+
+			if (velocidadX == 1 && !enColisionDerecha(velocidadX)) {
+				posicionX += velocidadX * this.velocidad;
+				return;
+			}
+
+			if (velocidadY == -1 && !enColisionArriba(velocidadY)) {
+				posicionY += velocidadY * this.velocidad;
+				return;
+			}
+
+			if (velocidadY == 1 && !enColisionAbajo(velocidadY)) {
+				posicionY += velocidadY * this.velocidad;
+				return;
+			}
 		}
 
+	}
+
+	private boolean enColisionArriba(final int velocidadY) {
+		for (int r = 0; r < mapa.areasColision.size(); r++) {
+			final Rectangle area = mapa.areasColision.get(r);
+			int origenX = area.x;
+			// 3 pixeles mas porque es un rectangle y ocupa 2px y 1px es para el
+			// siguiente
+			int origenY = area.y + velocidadY * (int) velocidad + 3 * (int) velocidad;
+
+			final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+
+			if (LIMITE_ARRIBA.intersects(areaFutura)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean enColisionAbajo(final int velocidadY) {
+		for (int r = 0; r < mapa.areasColision.size(); r++) {
+			final Rectangle area = mapa.areasColision.get(r);
+			int origenX = area.x;
+			// 3 pixeles mas porque es un rectangle y ocupa 2px y 1px es para el
+			// siguiente
+			int origenY = area.y + velocidadY * (int) velocidad - 3 * (int) velocidad;
+
+			final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+
+			if (LIMITE_ABAJO.intersects(areaFutura)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean enColisionIzquierda(final int velocidadX) {
+		for (int r = 0; r < mapa.areasColision.size(); r++) {
+			final Rectangle area = mapa.areasColision.get(r);
+
+			int origenX = area.x + velocidadX * (int) velocidad + 3 * (int) velocidad;
+			int origenY = area.y;
+
+			final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+
+			if (LIMITE_IZQUIERDA.intersects(areaFutura)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean enColisionDerecha(final int velocidadX) {
+		for (int r = 0; r < mapa.areasColision.size(); r++) {
+			final Rectangle area = mapa.areasColision.get(r);
+
+			int origenX = area.x + velocidadX * (int) velocidad - 3 * (int) velocidad;
+			int origenY = area.y;
+
+			final Rectangle areaFutura = new Rectangle(origenX, origenY, Constantes.LADO_SPRITE, Constantes.LADO_SPRITE);
+
+			if (LIMITE_DERECHA.intersects(areaFutura)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean fueraMapa(final int velocidadX, final int velocidadY) {
