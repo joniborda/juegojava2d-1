@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import principal.Constantes;
 import principal.entes.Jugador;
 import principal.herramientas.CargadorRecursos;
+import principal.interfaz_usuario.InterfazUsuario;
 import principal.mapas.Mapa;
 import principal.maquinaestado.EstadoJuego;
 
@@ -31,6 +32,8 @@ public class GestorJuego implements EstadoJuego {
 		g.drawString("Y = " + jugador.obtenerPosicionY(), 20, 30);
 		g.drawString("APS = " + Constantes.APS_CONTADOR, 20, 40);
 		g.drawString("FPS = " + Constantes.FPS_CONTADOR, 20, 50);
+
+		InterfazUsuario.dibujarBarraResistencia(g, jugador.resistencia);
 	}
 
 }

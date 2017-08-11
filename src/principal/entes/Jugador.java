@@ -41,6 +41,11 @@ public class Jugador {
 
 	private Mapa mapa;
 
+	public int resistencia = Constantes.RESISTENCIA_MAXIMA;
+	private int recuperacion = Constantes.RECUPERACION_MAXIMA;
+
+	private boolean recuperado = true;
+
 	public Jugador(final double posicionX, final double posicionY, Mapa mapa) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
@@ -56,10 +61,27 @@ public class Jugador {
 	}
 
 	public void actualizar() {
+		gestionarVelocidadResistencia();
 		cambiarAnimacionEstado();
 		enMovimiento = false;
 		determinarDireccion();
 		animar();
+	}
+
+	private void gestionarVelocidadResistencia() {
+		if (GestorControles.teclado.corriendo && resistencia > 0) {
+			this.velocidad = 3;
+			this.recuperado = false;
+			this.recuperacion = 0;
+		} else {
+			this.velocidad = 1;
+			if (!this.recuperado && this.recuperacion < Constantes.RECUPERACION_MAXIMA) {
+				this.recuperacion++;
+			}
+			if ((this.recuperacion == Constantes.RECUPERACION_MAXIMA && this.resistencia < Constantes.RESISTENCIA_MAXIMA)) {
+				this.resistencia++;
+			}
+		}
 	}
 
 	private void cambiarAnimacionEstado() {
@@ -135,25 +157,35 @@ public class Jugador {
 		if (!fueraMapa(velocidadX, velocidadY)) {
 			if (velocidadX == -1 && !enColisionIzquierda(velocidadX)) {
 				posicionX += velocidadX * this.velocidad;
+				restarResistencia();
 				return;
 			}
 
 			if (velocidadX == 1 && !enColisionDerecha(velocidadX)) {
 				posicionX += velocidadX * this.velocidad;
+				restarResistencia();
 				return;
 			}
 
 			if (velocidadY == -1 && !enColisionArriba(velocidadY)) {
 				posicionY += velocidadY * this.velocidad;
+				restarResistencia();
 				return;
 			}
 
 			if (velocidadY == 1 && !enColisionAbajo(velocidadY)) {
 				posicionY += velocidadY * this.velocidad;
+				restarResistencia();
 				return;
 			}
 		}
 
+	}
+
+	private void restarResistencia() {
+		if (GestorControles.teclado.corriendo && this.resistencia > 0) {
+			this.resistencia--;
+		}
 	}
 
 	private boolean enColisionArriba(final int velocidadY) {
@@ -235,6 +267,7 @@ public class Jugador {
 		}
 		return true;
 	}
+
 	private void cambiarVelocidadX(final int velocidadX, final int velocidadY) {
 		if (velocidadX == -1) {
 			direccion = 3;
@@ -291,6 +324,8 @@ public class Jugador {
 		g.drawRect(LIMITE_ABAJO.x, LIMITE_ABAJO.y, LIMITE_ABAJO.width, LIMITE_ABAJO.height);
 		g.drawRect(LIMITE_IZQUIERDA.x, LIMITE_IZQUIERDA.y, LIMITE_IZQUIERDA.width, LIMITE_IZQUIERDA.height);
 		g.drawRect(LIMITE_DERECHA.x, LIMITE_DERECHA.y, LIMITE_DERECHA.width, LIMITE_DERECHA.height);
+
+		g.drawString("Resistencia: " + this.resistencia, 20, 60);
 	}
 
 	public void establecerPosicionX(final double posicionX) {

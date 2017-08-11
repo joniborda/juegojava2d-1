@@ -10,6 +10,8 @@ public class Teclado implements KeyListener {
 	public Tecla izquierda = new Tecla();
 	public Tecla derecha = new Tecla();
 
+	public boolean corriendo = false;
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -28,6 +30,9 @@ public class Teclado implements KeyListener {
 		case KeyEvent.VK_D:
 		case KeyEvent.VK_RIGHT:
 			derecha.teclaPulsada();
+			break;
+		case KeyEvent.VK_SHIFT:
+			corriendo = true;
 			break;
 		}
 	}
@@ -50,6 +55,9 @@ public class Teclado implements KeyListener {
 		case KeyEvent.VK_D:
 		case KeyEvent.VK_RIGHT:
 			derecha.teclaLiberada();
+			break;
+		case KeyEvent.VK_SHIFT:
+			corriendo = false;
 			break;
 		}
 	}

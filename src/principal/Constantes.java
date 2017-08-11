@@ -22,4 +22,6 @@ public class Constantes {
 	public static String RUTA_CURSOR = "/imagenes/cursores/2.png";
 	public static String RUTA_LOGO = "/imagenes/hojasPersonajes/1.png";
 
+	public static final int RESISTENCIA_MAXIMA = 600;
+	public static final int RECUPERACION_MAXIMA = 100;
 }
