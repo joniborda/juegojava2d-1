@@ -315,8 +315,8 @@ public class Jugador {
 
 	public void dibujar(Graphics g) {
 
-		final int centroX = Constantes.ANCHO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
-		final int centroY = Constantes.ALTO_VENTANA / 2 - Constantes.LADO_SPRITE / 2;
+		final int centroX = Constantes.ANCHO_JUEGO / 2 - Constantes.LADO_SPRITE / 2;
+		final int centroY = Constantes.ALTO_JUEGO / 2 - Constantes.LADO_SPRITE / 2;
 
 		g.drawImage(imagenActual, centroX, centroY, null);
 		g.setColor(Color.green);
@@ -325,7 +325,7 @@ public class Jugador {
 		g.drawRect(LIMITE_IZQUIERDA.x, LIMITE_IZQUIERDA.y, LIMITE_IZQUIERDA.width, LIMITE_IZQUIERDA.height);
 		g.drawRect(LIMITE_DERECHA.x, LIMITE_DERECHA.y, LIMITE_DERECHA.width, LIMITE_DERECHA.height);
 
-		g.drawString("Resistencia: " + this.resistencia, 20, 60);
+		g.drawString("Resistencia: " + this.resistencia, 20, 50);
 	}
 
 	public void establecerPosicionX(final double posicionX) {

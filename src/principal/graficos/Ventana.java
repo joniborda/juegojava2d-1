@@ -34,7 +34,8 @@ public class Ventana extends JFrame {
 		setIconImage(icono.getImage());
 		setLayout(new BorderLayout());
 		add(sd, BorderLayout.CENTER);
-		// setUndecorated(true);
+		setUndecorated(true);
+
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);

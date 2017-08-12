@@ -26,12 +26,14 @@ public class GestorJuego implements EstadoJuego {
 	public void dibujar(Graphics g) {
 		mapa.dibujar(g, (int) jugador.obtenerPosicionX(), (int) jugador.obtenerPosicionY());
 		jugador.dibujar(g);
-		g.drawImage(logo, 640 - logo.getWidth() - 5, 360 - logo.getHeight() - 5, null);
+		g.drawImage(logo, Constantes.ANCHO_JUEGO - logo.getWidth() - 5, Constantes.ALTO_JUEGO - logo.getHeight() - 5,
+				null);
 		g.setColor(Color.red);
 		g.drawString("X = " + jugador.obtenerPosicionX(), 20, 20);
 		g.drawString("Y = " + jugador.obtenerPosicionY(), 20, 30);
-		g.drawString("APS = " + Constantes.APS_CONTADOR, 20, 40);
-		g.drawString("FPS = " + Constantes.FPS_CONTADOR, 20, 50);
+		g.drawString("FPS = " + Constantes.FPS_CONTADOR, 20, 40);
+		g.drawString("Escala x = " + Constantes.FACTOR_ESCALADO_X, 20, 60);
+		g.drawString("Escala x = " + Constantes.FACTOR_ESCALADO_Y, 20, 70);
 
 		InterfazUsuario.dibujarBarraResistencia(g, jugador.resistencia);
 	}

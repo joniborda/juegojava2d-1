@@ -21,7 +21,8 @@ public class GestorPrincipal {
 	}
 
 	public static void main(String[] args) {
-		GestorPrincipal gp = new GestorPrincipal("After-d", Constantes.ANCHO_VENTANA, Constantes.ALTO_VENTANA);
+		GestorPrincipal gp = new GestorPrincipal("After-d", Constantes.ANCHO_PANTALLA_COMPLETA,
+				Constantes.ALTO_PANTALLA_COMPLETA);
 		gp.iniciarJuego();
 		gp.iniciarBuclePrincipal();
 	}
